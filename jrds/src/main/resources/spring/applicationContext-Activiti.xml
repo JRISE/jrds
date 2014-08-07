@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:task="http://www.springframework.org/schema/task" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+	http://www.springframework.org/schema/task   
+	http://www.springframework.org/schema/task/spring-task-4.0.xsd
+	http://www.springframework.org/schema/util
+	http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+
+    <!-- Activiti的数据源等参数配置 -->
+    <bean id="processEngineConfiguration" class="org.activiti.spring.SpringProcessEngineConfiguration">
+        <property name="databaseType" value="oracle"/>
+        <property name="dataSource" ref="mainDataSource_dev1"/>
+        <property name="transactionManager" ref="transactionManager_dev1"/>
+        <property name="activityFontName" value="msyh"></property>
+        <property name="labelFontName" value="msyh"></property>
+        <!-- 包含历史和审计信息的表。可选的：历史级别设为none时不会使用。 注意这也会引用一些需要把数据保存到历史表中的功能（比如任务的评论）。 -->
+        <property name="history" value="full"></property>
+
+        <!-- 自动部署 -->
+        <!-- <property name="deploymentResources" value="classpath*:/activiti/*/*.bpmn"/>
+        <property name="createDiagramOnDeploy" value="true" /> -->
+
+        <!--
+        activiti数据表构建策略控制：
+        （见DbSqlSession.performSchemaOperationsProcessEngineBuild方法）
+        false - （默认）：检查数据库表的版本和依赖库的版本， 如果版本不匹配就抛出异常
+        true - 构建流程引擎时，执行检查，如果需要就执行更新。 如果表不存在，就创建。
+        create - 引擎启动时创建表；
+        create-drop - 构建流程引擎时创建数据库表， 关闭流程引擎时删除这些表。
+        drop-create - 引擎启动时先删除表再重新创建表
+        -->
+        <property name="databaseSchemaUpdate" value="true"/>
+        <property name="mailServerHost" value="#{config['mail.smtp.host']}"/>
+        <property name="mailServerPort" value="#{config['mail.smtp.port']}"/>
+        <property name="jpaHandleTransaction" value="true"/>
+        <property name="jpaCloseEntityManager" value="true"/>
+        <property name="jobExecutorActivate" value="false"/>
+    </bean>
+
+    <!-- Activiti的流程引擎 -->
+    <bean id="processEngine" class="org.activiti.spring.ProcessEngineFactoryBean">
+        <property name="processEngineConfiguration" ref="processEngineConfiguration"/>
+    </bean>
+
+    <!-- Activiti的资源库服务,用于获取流程定义等内容 -->
+    <bean id="repositoryService" factory-bean="processEngine" factory-method="getRepositoryService"/>
+    <!-- Activiti的运行时服务，可以用于完成任务等操作 -->
+    <bean id="runtimeService" factory-bean="processEngine" factory-method="getRuntimeService"/>
+    <!-- Activiti的任务服务,用于跟任务相关的操作，比如指派处理人等 -->
+    <bean id="taskService" factory-bean="processEngine" factory-method="getTaskService"/>
+    <!-- Activiti的历史服务,用于查询数据，比如查询已经完成和未完成的任务等 -->
+    <bean id="historyService" factory-bean="processEngine" factory-method="getHistoryService"/>
+    <!-- Activiti的管理服务 -->
+    <bean id="managementService" factory-bean="processEngine" factory-method="getManagementService"/>
+</beans>

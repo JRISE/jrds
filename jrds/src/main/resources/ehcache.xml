@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache updateCheck="false" dynamicConfig="true"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd">
+	<!-- 缓存位置 -->
+	<diskStore path="java.io.tmpdir/ehcache" />
+
+	<!-- 集群配置 -->
+	<!-- <cacheManagerPeerProviderFactory class="net.sf.ehcache.distribution.jgroups.JGroupsCacheManagerPeerProviderFactory" properties="connect=UDP(mcast_addr=231.12.21.112;mcast_port=45566;bind_port=33433;ip_ttl=32;mcast_send_buf_size=150000;mcast_recv_buf_size=80000): -->
+	<cacheManagerPeerProviderFactory class="net.sf.ehcache.distribution.jgroups.JGroupsCacheManagerPeerProviderFactory" properties="connect=UDP(mcast_addr=224.12.21.111;mcast_port=45566;bind_port=33433;ip_ttl=32;mcast_send_buf_size=150000;mcast_recv_buf_size=80000):
+	    PING(timeout=2000;num_initial_members=6):
+	    MERGE2(min_interval=5000;max_interval=10000):
+	    FD_SOCK:VERIFY_SUSPECT(timeout=1500):
+	    pbcast.NAKACK(retransmit_timeout=3000):
+	    UNICAST:
+	    pbcast.STABLE(desired_avg_gossip=20000):
+	    FRAG:
+	    pbcast.GMS(join_timeout=5000;print_local_addr=true)"
+		propertySeparator="::" />
+
+	<!-- 默认缓存 -->
+	<defaultCache maxElementsInMemory="1000000" eternal="false"
+		overflowToDisk="false" diskPersistent="false" timeToIdleSeconds="0"
+		timeToLiveSeconds="0" maxElementsOnDisk="10000000"
+		diskExpiryThreadIntervalSeconds="120" memoryStoreEvictionPolicy="LRU">
+		<!-- 集群监听 -->
+		<cacheEventListenerFactory
+			class="net.sf.ehcache.distribution.jgroups.JGroupsCacheReplicatorFactory"
+			properties="replicateAsynchronously=true, replicatePuts=true, replicateUpdates=true, replicateUpdatesViaCopy=false, replicateRemovals=true" />
+	</defaultCache>
+	
+	<!-- 权限验证 -->
+	<cache name="cn.com.chinatelecom.ecms.common.security.ShiroDataBaseRealm.authorizationCache" maxElementsInMemory="500" eternal="false"
+		overflowToDisk="false" diskPersistent="false" timeToIdleSeconds="0"
+		timeToLiveSeconds="0" maxElementsOnDisk="500"
+		diskExpiryThreadIntervalSeconds="120" memoryStoreEvictionPolicy="LRU">
+		<!-- 集群监听 -->
+		<cacheEventListenerFactory
+			class="net.sf.ehcache.distribution.jgroups.JGroupsCacheReplicatorFactory"
+			properties="replicateAsynchronously=true, replicatePuts=true, replicateUpdates=true, replicateUpdatesViaCopy=false, replicateRemovals=true" />
+	</cache>
+</ehcache>

@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE logback>
+
+<!-- 准生产环境配置 -->
+<configuration>
+	<property resource="config.properties" />
+
+	<contextName>${app.context.name.en}</contextName>
+	<property name="LOG_HOME" value="${catalina.base}/logs" />
+	<property name="MaxHistory" value="${log.max.history}" />
+	<property name="MaxFileSize" value="${log.max.file.size}" />
+
+	<!-- 控制台输出 -->
+	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+		<Encoding>UTF-8</Encoding>
+		<encoder>
+			<pattern>%date %-5level [${HOSTNAME} %thread] %caller{1}%msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	<logger name="cn.com.chinatelecom.ecms" level="DEBUG" />
+	<!-- mybatis SQL语句输出 -->
+	<logger name="cn.com.chinatelecom.ecms.dao" level="DEBUG" />
+	<!-- 操作日志 -->
+	<logger name="cn.com.chinatelecom.ecms.dao.dev1.OperationLogsMapper" level="ERROR" />
+
+	<logger name="java.sql" level="DEBUG" />
+	<logger name="org.apache.commons.dbcp" level="DEBUG" />
+	
+	<logger name="org.springframework" level="DEBUG" />
+	<logger name="org.springframework.jdbc" level="INFO" />
+	<logger name="org.springframework.cache" level="INFO" />
+	
+	<logger name="org.mybatis" level="DEBUG" />
+	<logger name="org.apache.ibatis" level="DEBUG" />
+
+	<logger name="net.sf.ehcache" level="DEBUG" />
+
+	<logger name="org.apache.shiro" level="DEBUG" />
+	
+	<logger name="org.activiti" level="DEBUG" />
+
+	<logger name="org.quartz" level="INFO" />
+	<logger name="org.springframework.scheduling.quartz" level="INFO" />
+
+	<!-- 日志输出级别 -->
+	<root level="INFO">
+		<appender-ref ref="stdout" />
+	</root>
+</configuration>

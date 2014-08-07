@@ -1,0 +1,607 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+
+<!-- 工具配置文件（自动生成java类） -->
+
+<!-- D:\mybatis-generator-core-1.3.2\lib>java -jar mybatis-generator-core-1.3.2.jar -configfile generatorConfig_ecms2_dev1.xml -overwrite -->
+
+<generatorConfiguration>
+	<!-- 设置mysql驱动路径 -->
+	<classPathEntry location="./ojdbc14.jar" />
+	<!-- 此处指定生成针对MyBatis3的DAO -->
+	<context id="DB2Tables" targetRuntime="MyBatis3">
+
+		<commentGenerator>
+			<!-- 是否注释，false为注释 -->
+			<property name="suppressAllComments" value="false" />
+			<!-- 是用来除去时间信息的，这在配合类似subversion的代码管理工具时使用很有效，因为可以减少没有必要的注释迁入 -->
+			<property name="suppressDate" value="true" />
+		</commentGenerator>
+
+
+		<!-- jdbc连接信息 -->
+		<jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+			connectionURL="jdbc:oracle:thin:@//172.16.20.32:1521/orcl"
+			userId="e_channel" password="e_channel" />
+
+		<!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer true，把JDBC DECIMAL 和 
+			NUMERIC 类型解析为java.math.BigDecimal -->
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<!-- 模型的生成信息，这里将指定这些Java model(VO)类的生成路径 -->
+		<javaModelGenerator targetPackage="cn.com.chinatelecom.ecms.pojo.dev1"
+			targetProject="./">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<!-- mybatis 的sqlMapper XML文件的生成信息，包括生成路径等 -->
+		<sqlMapGenerator targetPackage="cn.com.chinatelecom.ecms.dao.dev1"
+			targetProject="./">
+			<!-- enableSubPackages:是否让schema作为包的后缀 -->
+			<property name="enableSubPackages" value="true" />
+			<!-- 从数据库返回的值被清理前后的空格 -->
+			<property name="trimStrings" value="true" />
+		</sqlMapGenerator>
+
+		<!-- 是应用接口的生成信息(DAO Interface) -->
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="cn.com.chinatelecom.ecms.dao.dev1" targetProject="./">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+		<!-- 想要生成的数据库表,自动化工具会根据该表的结构生成相应的vo对象 -->
+		<!-- <table schema="" tableName="TS_MK_INFO12800" domainObjectName="TS_MK_INFO" /> -->
+		<!--4G错误日志-->
+		<table schema="" tableName="LOG_ORDER_ISSUE_JOB_JOURNAL" domainObjectName="OrderIssueJobJournalLogMapper">
+		</table>
+		<!--业务办理-->
+		<table schema="" tableName="PRIV_CUST_HANDLING" domainObjectName="CustHandling">
+		</table>
+		<!--F码优惠券日志-->
+		<table schema="" tableName="TS_F_COUPON_YZ_LOG" domainObjectName="FCouponYzLog">
+		</table>
+		<!-- ******************* 订单关闭策略 ******************* -->
+		<!-- 用于记录订单修改价格的日志 --> 
+		<table schema="" tableName="order_price_modify_logs" domainObjectName="OrderPriceModifyLogs">
+		</table>
+		<!-- 用于记录修改订单价格的日志 --> 
+		<table schema="" tableName="LOG_UPDATE_ORDER_MONEY" domainObjectName="OrderupdateMoneylog">
+		</table>
+		<!-- 用于记录代理商基本信息 -->
+		<table schema="" tableName="DPF_AGENT_INFO" domainObjectName="AgentInfo">
+		</table>
+		<!-- 订单关闭策略表 -->
+		<table schema="" tableName="ECT_ORDER_CLOSE_STRATEGY" domainObjectName="OrderCloseStrategy">
+			<generatedKey column="ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<!-- 订单关闭策略和销售品对应表 -->
+		<table schema="" tableName="ECT_ORDER_STRATEGY_GOODS" domainObjectName="OrderStrategyGoods"/>
+		<!-- ******************* 产品 ******************* -->
+		<!-- 合约类型表 -->
+		<table schema="" tableName="TS_MK_MB_TYPE6200" domainObjectName="ContractType">
+			<generatedKey column="TS_MK_MB_TYPE_ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<!-- 产品基础信息 -->
+		<table schema="" tableName="TS_SP_INFO" domainObjectName="Product" />
+		<!-- 产品业务信息 -->
+		<table schema="" tableName="TDY_TS_SP_INFO" domainObjectName="ProductBusiness" />
+		<!-- 产品品牌 -->
+		<table schema="" tableName="TS_SP_PP_INFO" domainObjectName="Brand" />
+		<!-- 产品参数 -->
+		<table schema="" tableName="TS_SP_CS_INFO" domainObjectName="ProductParam" />
+		
+		<!-- 产品类别 -->
+		<table schema="" tableName="TB_SP_D_TYPE" domainObjectName="ProductDType" />
+		<!-- 产品类型 -->
+		<table schema="" tableName="TB_SP_TYPE" domainObjectName="ProductType" />
+		<!-- 产品类别参数组 -->
+		<table schema="" tableName="TS_SP_CS_GROUP" domainObjectName="ParamGroup" />
+		<!-- 产品类别参数组明细 -->
+		<table schema="" tableName="TS_SP_CS_GROUP_MX" domainObjectName="ParamGroupDetail" />
+		<!-- 产品相册表 -->
+		<table schema="" tableName="TS_SP_PIC" domainObjectName="ProductImage">
+			<generatedKey column="TS_ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<!-- 可选包明细信息 -->
+		<table schema="" tableName="TS_SP_KXB_INFO" domainObjectName="ProductPackType" >
+			<generatedKey column="TS_MK_ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<!-- 套餐选项信息 -->
+		<table schema="" tableName="ECT_TC_BASIC_INFO" domainObjectName="EctTcBasicInfo"/>
+		<!-- 套餐扩展信息 -->
+		<table schema="" tableName="ECT_TC_EXTINFO" domainObjectName="EctTcExtinfo"/>
+		<!-- ******************* 销售品 ******************* -->
+		<!-- 产品基础信息 -->
+		<table schema="" tableName="TS_MK_INFO12500" domainObjectName="Goods" />
+		<!-- 销售品图片 -->
+		<table schema="" tableName="TS_MK_PIC12500" domainObjectName="Picture">
+			<generatedKey column="TS_ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<!-- 销售品类别 -->
+		<table schema="" tableName="TB_SYSTEM_MK_SP_SX12500" domainObjectName="TypeDirectory">
+			<generatedKey column="TB_SP_SX_ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<!-- 销售品类型 -->
+		<table schema="" tableName="TS_MK_SP_FX12500" domainObjectName="TypeDirectoryDetail">
+			<generatedKey column="TB_ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<!-- 销售品筛选条件 -->
+		<table schema="" tableName="TS_SHOP_SX" domainObjectName="GoodsScreening">
+			<generatedKey column="TS_SHOP_SX_ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<!-- 销售品筛选条件属性值 -->
+		<table schema="" tableName="TS_MK_SP_SX12500" domainObjectName="GoodsConditionVal">
+			<generatedKey column="TS_ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<!-- 销售品赠品信息 -->
+		<table schema="" tableName="TS_SHOP_ZP" domainObjectName="GoodsFree">
+			<generatedKey column="TS_ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<!-- 关联推荐表 -->
+		<table schema="" tableName="TS_SHOP_TJ" domainObjectName="GoodsRecommend">
+			<generatedKey column="TS_ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<!-- 销售品上架号池绑定表 -->
+		<table schema="" tableName="TS_MK_HCBD12600" domainObjectName="GoodsBindTelNumberPool">
+			<generatedKey column="TS_MK_ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<!-- 销售品分期支付 -->
+		<table schema="" tableName="TS_MK_AMOUNT12500" domainObjectName="GoodsInstallment">
+			<generatedKey column="ID" sqlStatement="select '00000000'||sys_guid() FROM DUAL" identity="false" />
+		</table>
+		<!-- 银行信息 -->
+		<table schema="" tableName="S_BANK_INFO" domainObjectName="BankInfo">
+			<generatedKey column="ID" sqlStatement="select sys_guid() FROM DUAL" identity="false" />
+		</table>
+		<!-- 银行分期支付信息 -->
+		<table schema="" tableName="TS_BANK_NUMBEROFINST" domainObjectName="BankInstallment">
+			<generatedKey column="ID" sqlStatement="select '00000000'||sys_guid() FROM DUAL" identity="false" />
+		</table>
+		<!-- 销售品支付方式 -->
+		<table schema="" tableName="TS_PAYMENT_PATTERN12500" domainObjectName="GoodsPayment">
+			<generatedKey column="TS_ID" sqlStatement="select '00000000'||sys_guid() FROM DUAL" identity="false" />
+		</table>
+		<!-- 销售品送货方式 -->
+		<table schema="" tableName="TS_ECMS_XSP_DELIVER_GOODS" domainObjectName="GoodsDeliver">
+			<generatedKey column="TS_MK_ID" sqlStatement="select '00000000'||sys_guid() FROM DUAL" identity="false" />
+		</table>
+		<!-- 自提营业厅 -->
+		<table schema="" tableName="TS_ECMS_BUSINESS_HALL" domainObjectName="Hall">
+			<generatedKey column="TS_MK_ID" sqlStatement="select '00000000'||sys_guid() FROM DUAL" identity="false" />
+		</table>
+		<!-- 销售品和营业厅 -->
+		<table schema="" tableName="TS_ECMS_BUSINESS_HALL_XSP" domainObjectName="GoodsHall">
+			<generatedKey column="TS_MK_ID" sqlStatement="select '00000000'||sys_guid() FROM DUAL" identity="false" />
+		</table>
+		<!-- 查询合约商时类别id对应的类别名称 -->
+		<table schema="" tableName="TB_SYSTEM_MK_TYPE" domainObjectName="SystemMkType">
+		</table>
+		<!-- 新建销售品基本信息页面绑定销售品 -->
+		<table schema="" tableName="TS_MK_HS12500" domainObjectName="GoodsBindGoods">
+			<generatedKey column="TS_MK_HS_ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<!-- 查询销售品的标签名称 -->
+		<table schema="" tableName="TS_MK_SP_BQ12500" domainObjectName="GoodsTagName">
+		</table>
+		<!-- 优惠套装表 -->
+		<table schema="" tableName="TS_SHOP_YHTC" domainObjectName="DisCountPackage">
+			<generatedKey column="TS_ID" sqlStatement="select '00000000'||sys_guid() FROM DUAL" identity="false" />
+		</table>
+		<!-- 搭配推荐表 -->
+		<table schema="" tableName="TS_SHOP_ZHXS" domainObjectName="GoodsRecommendProduct">
+			<generatedKey column="TS_ID" sqlStatement="select '00000000'||sys_guid() FROM DUAL" identity="false" />
+		</table>
+		<!-- 优惠卷主表 -->
+		<table schema="" tableName="TS_MK_INFO17100" domainObjectName="DisCountMaster">
+			<generatedKey column="TS_MK_ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table> 
+		<!-- 优惠卷明细表 -->
+		<table schema="" tableName="TS_COUPON_DETAIL" domainObjectName="DisCountDetail">
+			<generatedKey column="TS_MK_ZID" sqlStatement="select '00000000'||sys_guid() FROM DUAL" identity="false" />
+		</table>
+		<!-- 销售品和合约、合约明细、营销策略的关联关系表 -->
+		<table schema="" tableName="TS_ECMS_HY_MX" domainObjectName="ContractDetailWithGoods">
+			<generatedKey column="TS_ID" sqlStatement="select '00000000'||sys_guid() FROM DUAL" identity="false" />
+		</table>
+		<!-- 销售品展现组表 -->
+		<table schema="" tableName="ECT_XSP_GROUP" domainObjectName="XspGroup">
+			<generatedKey column="ECT_ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<!-- 销售品展现组明细表 -->
+		<table schema="" tableName="ECT_XSP_GROUP_DETAIL" domainObjectName="XspGroup">
+			<generatedKey column="ECT_ZID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<!-- 销售品展现渠道表 -->
+		<table schema="" tableName="ECT_XSP_QD" domainObjectName="XspQd">
+			<generatedKey column="ECT_ID" sqlStatement="select '00000000'||sys_guid() FROM DUAL" identity="false" />
+		</table>
+		<!-- ******************* 合约、套餐 ******************* -->
+		<!-- M合约主表-->
+		<table schema="" tableName="TS_MK_INFO6200" domainObjectName="Contract">
+			<generatedKey column="TS_MK_ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table> 
+		<!-- M合约明细表 -->
+		<table schema="" tableName="TS_MK_SP_INFO6200" domainObjectName="ContractDetail">
+			<generatedKey column="TS_MK_ZID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<!-- 销售品与合约绑定表 -->
+		<table schema="" tableName="TS_MK_INFO_HY12500" domainObjectName="ContractWithGoodsBind">
+			<generatedKey column="TS_ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<!-- M套餐主表 -->
+		<table schema="" tableName="TS_MK_INFO6300" domainObjectName="TelPackage">
+			<generatedKey column="TS_MK_ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<!-- M套餐明细表-->
+		<table schema="" tableName="TS_MK_SP_INFO6300" domainObjectName="TelPackageDetail">
+			<generatedKey column="TS_MK_ZID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table> 
+		<!-- 销售品与套餐绑定表-->
+		<table schema="" tableName="TS_MK_INFO_TC12500" domainObjectName="TelPackageWithGoodsBind">
+			<generatedKey column="TS_ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table> 
+		<!-- 销售品的扩展表 -->
+		<table schema="" tableName="TDY_TS_MK12500" domainObjectName="GoodsDevelop">
+			<generatedKey column="TDY_ID" sqlStatement="select '00000000'||sys_guid() FROM DUAL" identity="false" />
+		</table>
+		<!-- 销售品定时上下架任务日志表 -->
+		<table schema="" tableName="ECT_GOODS_TASK" domainObjectName="GoodsTask">
+			<generatedKey column="GOODS_TASK_ID" sqlStatement="select sys_guid() FROM DUAL" identity="false" />
+		</table>
+		<!-- 销售品定时上下架任务明细表 -->
+		<table schema="" tableName="ECT_GOODS_TASK_DETAIL" domainObjectName="GoodsTaskDetail">
+			<generatedKey column="GOODS_TASK_DETAIL_ID" sqlStatement="select sys_guid() FROM DUAL" identity="false" />
+		</table>
+		<!-- UIM卡类型 -->
+		<table schema="" tableName="ECT_PRODUCT_UIMCARD" domainObjectName="ProductUimCard">
+			<generatedKey column="TS_ID" sqlStatement="select '00000000'||sys_guid() FROM DUAL" identity="false" />
+		</table>
+		<!-- 套餐明细表 -->
+		<table schema="" tableName="TS_ECMS_TC_MX" domainObjectName="TelPackageDetailWithGoods">
+			<generatedKey column="TS_ID" sqlStatement="select '00000000'||sys_guid() FROM DUAL" identity="false" />
+		</table>
+		<!-- 资格组 -->
+		<table schema="" tableName="TS_ECMS_THGROUP" domainObjectName="Zigezu">
+			<generatedKey column="TS_GROUP_ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<!-- 销售品和预存款类型的产品关联表 -->
+		<table schema="" tableName="ECT_PRODUCT_PRESTORE" domainObjectName="GoodsPrestore">
+			<generatedKey column="ID" sqlStatement="select '00000000'||sys_guid() FROM DUAL" identity="false" />
+		</table>
+		<!-- 销售品和虚拟赠品优惠券关联表 -->
+		<table schema="" tableName="TS_XSP_GIFT_COUPON" domainObjectName="GoodsGiftCoupon">
+			<generatedKey column="ID" sqlStatement="select '00000000'||sys_guid() FROM DUAL" identity="false" />
+		</table>
+		<!-- 销售品扩展信息 -->
+		<table schema="" tableName="ECT_MK_INFO12500" domainObjectName="GoodsRelationInfo">
+			<generatedKey column="TS_ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<!-- 销售品文本步骤配置 -->
+		<table schema="" tableName="ECT_MK_INFO12500_WB" domainObjectName="GoodsText">
+			<generatedKey column="TS_ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<!-- 销售品终端配置 -->
+		<table schema="" tableName="ECT_MK_INFO12500_ZD" domainObjectName="GoodsDevice">
+			<generatedKey column="TS_ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<!-- ******************* 营销 ******************* -->
+		<!-- 营销策略、营销活动 -->
+		<table schema="" tableName="TS_MK_INFO7100" domainObjectName="Marketing">
+			<generatedKey column="TS_MK_ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<table schema="" tableName="TDY_TS_MK7100" domainObjectName="MarketingInfo">
+			<generatedKey column="TDY_ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<!-- 销售品-营销-关系表 -->
+		<table schema="" tableName="TS_MK_INFO_YX12500" domainObjectName="GoodsMarketingLink">
+			<generatedKey column="TS_ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<!-- 淘宝订单表-->
+		<table schema="" tableName="ECT_DEAL_ORDER" domainObjectName="OtherChannelOrder">
+			<generatedKey column="ID" sqlStatement="select SYS_GUID() FROM DUAL" identity="false" />
+		</table>
+		<!-- 淘宝订单与销售品关联-->
+		<table schema="" tableName="ECT_INFO_DEAL_ORDER" domainObjectName="OtherOrderGoodsBind">
+			<generatedKey column="ID" sqlStatement="select SYS_GUID() FROM DUAL" identity="false" />
+		</table>
+		<!-- 限购策略表 -->
+		<table schema="" tableName="ECT_MK_INFO7100" domainObjectName="MkInfo7100">
+			<generatedKey column="ECT_ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<!-- 限购策略表和销售品的关联表-->
+		<table schema="" tableName="ECT_MK_INFO7100_XSP" domainObjectName="MkInfo7100Xsp">
+			<generatedKey column="ECT_ZID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<!-- ******************* 号码资源 ******************* -->
+		<!-- 号码资源表 -->
+		<table schema="" tableName="TS_MK_INFO12800" domainObjectName="PhoneNumber" />
+		<!-- 号码特征表 -->
+		<table schema="" tableName="TS_MK_HM_TZ" domainObjectName="NumberCharacteristic" />
+		<!-- M合约主表 -->
+		<table schema="" tableName="TS_MK_INFO6200" domainObjectName="Contract">
+			<generatedKey column="TS_MK_ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<!-- 号码池 -->
+		<table schema="" tableName="TS_MK_INFO12900" domainObjectName="ContractDetail">
+			<generatedKey column="TS_MK_ZID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<!-- 号码资源临时表 -->
+		<table schema="" tableName="ECT_12800TMP" domainObjectName="PhoneNumberTemp" />
+		<!-- HCode码 -->
+		<table schema="" tableName="S_PHONE_AREADETAIL" domainObjectName="HCode" />
+		
+		<!-- ******************* 订单结算 ******************* -->
+		<table schema="" tableName="ECT_SHOP_SETTLEMENT" domainObjectName="ShopSettlement"/>
+		<table schema="" tableName="ECT_ORDER_SETTLEMENT" domainObjectName="OrderSettlement"/>
+		<table schema="" tableName="ECT_SETTLEMENT_PIGEONHOLE" domainObjectName="SettlementPigeonhole"/>
+		<table schema="" tableName="ECT_SETTLEMENT_PIGEONHOLE_LOG" domainObjectName="SettlementPigeonholeLog"/>
+		
+		<!-- ******************* 订单 ******************* -->
+		<table schema="" tableName="ECT_GOODS_QD" domainObjectName="GoodsQd">
+		</table>
+		<!-- 订单发货失败信息表-->
+		<table schema="" tableName="ECT_ORDER_SEND_FAIL" domainObjectName="OrderSendFailInfo">
+		</table>
+		<!-- -->
+		<table schema="" tableName="DEAL_ORDER_CHL_INFO" domainObjectName="OrderChlInfo">
+		</table>
+		<!-- 上网卡信息表-->
+		<table schema="" tableName="ECT_NET_OPEN" domainObjectName="EctNetInfo">
+			<generatedKey column="ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<!-- -->
+		<table schema="" tableName="ECT_LOGISTICS" domainObjectName="LogisticsInfo">
+			<generatedKey column="ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<!-- C类合约机拆机表 -->
+		<table schema="" tableName="ECT_ORDER_SPLIT_INFO" domainObjectName="OrderSplitInfo">
+			<generatedKey column="ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<!-- 报峻历史记录表 -->
+		<table schema="" tableName="DEAL_ORDER_COMPRECORD" domainObjectName="DealOrderComprecord" />
+		<!-- 分账信息 -->
+		<table schema="" tableName="DEAL_LEDGER_ACCOUNT" domainObjectName="LedgerAccount" />
+		<!-- 合作商基本信息表 -->
+		<table schema="" tableName="TS_CRM_CUSTOMER_INFO" domainObjectName="CustomerInfo" />
+		<!-- 订单流程接受邮件 -->
+		<table schema="" tableName="ECT_PROCESS_EMAIL" domainObjectName="OrderProcessEmail" >
+			<generatedKey column="ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<!-- 订单用户选择记录表-可找到订单中的合约套餐信息 -->
+		<table schema="" tableName="DEAL_ORDER_USER_CHOOSE" domainObjectName="OrderUserChoose" >
+		</table>
+		<!-- 充值卡预定信息 -->
+		<table schema="" tableName="DEAL_PAYCARD_SUBSCRIBE" domainObjectName="OrderPaycardSubscribe" >
+			<generatedKey column="ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<!-- 充值反馈记录表 -->
+		<table schema="" tableName="DEAL_CHARGE_RETURN" domainObjectName="OrderChargeReturn" >
+			<generatedKey column="ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<!-- 充值订单表 -->
+		<table schema="" tableName="DEAL_CHARGE_ORDER" domainObjectName="OrderChargeInfo" >
+			<generatedKey column="ORDER_ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<!-- 撤单/取消订单-->
+		<table schema="" tableName="DEAL_CANCLE_ORDER" domainObjectName="OrderCancleInfo" >
+			<generatedKey column="ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table> 
+		<!-- 订单退款表 -->
+		<table schema="" tableName="DEAL_ORDER_RETURN_MONEY" domainObjectName="OrderReturnMoney" >
+			<generatedKey column="RETURN_MONEY_ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<!-- 订单退换表-->
+		<table schema="" tableName="DEAL_RETURN_PRODUCTS" domainObjectName="OrderReturnInfo" >
+			<generatedKey column="ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table> 
+		<!-- 订单串号和卡号记录表 -->
+		<table schema="" tableName="TS_MK_INFO_KH11000" domainObjectName="OrderNumberInfo" >
+			<generatedKey column="TS_ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<!-- 淘宝订单的套餐配置表 -->
+		<table schema="" tableName="ECT_TC_ALLOWANCE" domainObjectName="TelPackageConfigure" >
+			<generatedKey column="ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<table schema="" tableName="CLIENT_APP_DETAIL" domainObjectName="ClientAppDetail" >
+			<generatedKey column="ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<!-- 流程与省编码的对应关系 -->
+		<table schema="" tableName="ECT_PROCESS_SH_LINK" domainObjectName="ProcessProvinceWithBind" >
+			<generatedKey column="ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<!-- 订单操作历史及状态变更表 -->
+		<table schema="" tableName="DEAL_CUST_INFO" domainObjectName="DealCustInfo" />
+		<!--订单付款信息-->
+		<table schema="" tableName="DEAL_PAY_INFO" domainObjectName="DealPayInfo" >
+			<generatedKey column="PAY_ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<!--订单操作历史及状态变更表-->
+		<table schema="" tableName="DEAL_ORDERSTAT_HIS" domainObjectName="DealOrderstatHis" >
+			<generatedKey column="ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		
+		<!-- ******************* 客户端  ******************* -->
+		<!-- 展示页 -->
+		<table schema="" tableName="CLIENT_INDEX_PIC" domainObjectName="ClientIndexPic" />
+		<!-- 发布管理 -->
+		<table schema="" tableName="CLIENT_ADV_TURNS" domainObjectName="ClientAdvTurns" >
+			<generatedKey column="ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<table schema="" tableName="CLIENT_APP_DETAIL" domainObjectName="ClientAppDetail" >
+			<generatedKey column="ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<!-- 广告分类管理 -->
+		<table schema="" tableName="CLIENT_ADV_TYPE" domainObjectName="ClientAdvType" />
+		
+		<!-- ******************* 仓库管理 ******************* -->
+		<!-- 仓库表 -->
+		<table schema="" tableName="TS_Store_Info_ERP" domainObjectName="Store" />
+		<!-- 库存信息表 -->
+		<table schema="" tableName="TS_STORE_SP_INFO_TZM" domainObjectName="StoreInfo" />
+		<!-- 库存单据表 -->
+		<table schema="" tableName="ECT_STOCK_VOUCHER" domainObjectName="StockVoucher" />
+		<!-- 库存单据明细表 -->
+		<table schema="" tableName="ECT_STOCK_VOUCHER_DETAIL" domainObjectName="StockVoucherDetail" />
+		
+		<!-- ******************* 配置模块 ******************* -->
+		<!-- 省市县信息表 -->
+		<table schema="" tableName="s_freight_areadef" domainObjectName="FreightAreaDef">
+		</table>
+		<!-- 店铺表 -->
+		<table schema="" tableName="TS_ASSET_INFO" domainObjectName="Shop" />
+		<!-- 发票提示管理 -->
+		<table schema="" tableName="ECT_RECEIPT_WORDS" domainObjectName="ReceiptContentManage">
+			<generatedKey column="FP_ID" sqlStatement="select sys_guid() FROM DUAL" identity="false" />
+		</table>
+		<!-- 快速访问配置表 -->
+		<table schema="" tableName="ECT_VISIT" domainObjectName="Visit">
+			<generatedKey column="ECT_ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<!-- 北京发票模板表 -->
+		<table schema="" tableName="ECT_RECEIPT_INFO" domainObjectName="ReceiptInfo">
+			<generatedKey column="ECT_ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<!-- 北京发票模板明细表 -->
+		<table schema="" tableName="ECT_RECEIPT_DETAIL" domainObjectName="ReceiptDetail">
+			<generatedKey column="ECT_ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<!-- 北京发票模板内容表 -->
+		<table schema="" tableName="ECT_RECEIPT_CONTENT" domainObjectName="ReceiptContent">
+			<generatedKey column="ECT_ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<!-- 北京发票模板类型表 -->
+		<table schema="" tableName="ECT_RECEIPT_TYPE" domainObjectName="ReceiptType">
+			<generatedKey column="ECT_ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<!-- ******************* 优惠券管理  ******************* -->
+		<!-- 优惠劵信息主表 -->
+		<table schema="" tableName="TS_MK_INFO17100" domainObjectName="Coupon">
+			<generatedKey column="TS_MK_ID" sqlStatement="select '00000000'||sys_guid() FROM DUAL" identity="false" />
+		</table>
+		<!-- 优惠劵信息明细表 -->
+		<table schema="" tableName="TS_COUPON_DETAIL" domainObjectName="CouponDetail">
+			<generatedKey column="TS_MK_ZID" sqlStatement="select '00000000'||sys_guid() FROM DUAL" identity="false" />
+		</table>
+		<!-- 优惠券与销售品绑定表 -->
+		<table schema="" tableName="TS_XSP_COUPON" domainObjectName="GoodsBindDisCount">
+			<generatedKey column="ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<!-- 优惠券密文临时表 -->
+		<table schema="" tableName="ECT_COUPON_TMP" domainObjectName="CouponTemp">
+		</table>
+		
+		<!-- ******************* 系统管理 ******************* -->
+		<!-- 用户 -->
+		<table schema="" tableName="userinf" domainObjectName="Admin" />
+		<!-- 部门 -->
+		<table schema="" tableName="bm" domainObjectName="Department" />
+		<!-- 菜单 -->
+		<table schema="" tableName="ECT_MENU" domainObjectName="Menu" />
+		<!-- 角色 -->
+		<table schema="" tableName="ECT_ROLE" domainObjectName="Role" />
+		<!-- 访问权限 -->
+		<table schema="" tableName="ECT_Access_permissions" domainObjectName="AccessPermissions" />
+		<!-- 数据权限 -->
+		<table schema="" tableName="ect_DATA_permissions" domainObjectName="DataPermissions" />
+		<!-- 用户-角色-关系表 -->
+		<table schema="" tableName="ect_userinf_role_link" domainObjectName="AdminRoleLink" />
+		<!-- 角色-菜单-关系表 -->
+		<table schema="" tableName="ect_role_menu_link" domainObjectName="RoleMenuLink" />
+		<!-- ******************* 交易管理 ******************* -->
+		<!-- 评论管理 -->
+		<table schema="" tableName="QT_EVALUATION" domainObjectName="Comment" />
+		<!-- FAQ管理 -->
+		<table schema="" tableName="QT_FAQ" domainObjectName="FAQ" />
+		<!-- 销售品用户关注管理 -->
+		<table schema="" tableName="QT_MY_ATTENTION" domainObjectName="GoodsUserAttention" />
+		<!-- ******************* 合作商管理 ******************* -->
+		<!-- 合作商更多的信息 -->
+		<table schema="" tableName="TDY_TS_CRM_CUSTOMER" domainObjectName="CustomerMoreInfo" />
+		<!-- 合作商和店铺的关联表 -->
+		<table schema="" tableName="ts_crm_customer_hs" domainObjectName="CustomerInfoOther">
+			<generatedKey column="TS_CRM_HS_ID" sqlStatement="select '00000000'||sys_guid() FROM DUAL" identity="false" />
+		</table>
+		<!-- ******************* 其他 ******************* -->
+		<!-- 用户订阅-->
+		<table schema="" tableName="qt_notice" domainObjectName="UserSubscribe">
+			<generatedKey column="ID" sqlStatement="select SYS_GUID() FROM DUAL" identity="false" />
+		</table>
+		<!-- ******************* 优惠券管理 ******************* -->
+		<!--优惠劵信息主表 -->
+		<table schema="" tableName="TS_MK_INFO17100" domainObjectName="Coupon">
+			<generatedKey column="TS_MK_ID" sqlStatement="select '00000000'||sys_guid() FROM DUAL" identity="false" />
+		</table>
+		<!--优惠劵信息明细表 -->
+		<table schema="" tableName="TS_COUPON_DETAIL" domainObjectName="CouponDetail">
+			<generatedKey column="TS_MK_ZID" sqlStatement="select '00000000'||sys_guid() FROM DUAL" identity="false" />
+		</table>
+		<!--销售品与优惠劵绑定表 -->
+		<table schema="" tableName="TS_XSP_COUPON" domainObjectName="TsXspCoupon">
+			<generatedKey column="ID" sqlStatement="select '00000000'||sys_guid() FROM DUAL" identity="false" />
+		</table>
+		<!-- ******************* 虚拟赠品优惠券管理 ******************* -->
+		<!--虚拟赠品优惠券主表 -->
+		<table schema="" tableName="TS_MK_INFO17200" domainObjectName="GiftCoupon">
+			<generatedKey column="TS_MK_ID" sqlStatement="select '00000000'||sys_guid() FROM DUAL" identity="false" />
+		</table>
+		<!--虚拟赠品优惠券明细表 -->
+		<table schema="" tableName="TS_GIFT_COUPON_DETAIL" domainObjectName="GiftCouponDetail">
+			<generatedKey column="TS_MK_ZID" sqlStatement="select '00000000'||sys_guid() FROM DUAL" identity="false" />
+		</table>
+		<!-- ******************* 营业厅管理******************* -->
+		<!--营业厅表 -->
+		<table schema="" tableName="TS_ECMS_BUSINESS_HALL" domainObjectName="BusinessHall">
+			<generatedKey column="TS_MK_ID" sqlStatement="select '00000000'||sys_guid() FROM DUAL" identity="false" />
+		</table>
+		<!-- ******************* 规格和规格组管理******************* -->
+		<!--规格表 -->
+		<table schema="" tableName="TS_SHOP_GG" domainObjectName="Specification">
+			<generatedKey column="TS_SHOP_GG_ID" sqlStatement="select '00000000'||sys_guid() FROM DUAL" identity="false" />
+		</table>
+		<!--规格值表 -->
+		<table schema="" tableName="TS_SHOP_GG_VALUE" domainObjectName="SpecValue">
+			<generatedKey column="TS_ID" sqlStatement="select '00000000'||sys_guid() FROM DUAL" identity="false" />
+		</table>
+		<!--规格组主表 -->
+		<table schema="" tableName="TS_SHOP_GROUP" domainObjectName="SpecGroup">
+			<generatedKey column="TS_GROUP_ID" sqlStatement="select '00000000'||sys_guid() FROM DUAL" identity="false" />
+		</table>
+		<!--规格组明细表 -->
+		<table schema="" tableName="TS_SHOP_GROUP_MX" domainObjectName="SpecGroupDetail">
+			<generatedKey column="TS_ID" sqlStatement="select '00000000'||sys_guid() FROM DUAL" identity="false" />
+		</table>
+		<!--规格与销售品绑定表 -->
+		<table schema="" tableName="TS_SP_GG_MX" domainObjectName="SpecGroupGoods">
+			<generatedKey column="TS_ID" sqlStatement="select '00000000'||sys_guid() FROM DUAL" identity="false" />
+		</table>
+		<!-- ******************* 销售品类别类型管理******************* -->
+		<!--销售品类别表 -->
+		<table schema="" tableName="TB_SYSTEM_MK_SP_SX12500" domainObjectName="GoodsCategory">
+			<generatedKey column="TB_SP_SX_ID" sqlStatement="select '00000000'||sys_guid() FROM DUAL" identity="false" />
+		</table>
+		<!--销售品类型表 -->
+		<table schema="" tableName="TS_MK_SP_FX12500" domainObjectName="GoodsType">
+			<generatedKey column="TB_ID" sqlStatement="select '00000000'||sys_guid() FROM DUAL" identity="false" />
+		</table>
+		<!-- 销售品类型和店铺绑定表 -->
+		<table schema="" tableName="TS_MK_SP_FX_GS12500" domainObjectName="GoodsTypeBindShop">
+			<generatedKey column="TS_ID" sqlStatement="select '00000000'||sys_guid() FROM DUAL" identity="false" />
+		</table>
+		<!--销售品类别绑定品牌 -->
+		<table schema="" tableName="TS_SHOP_SX_PP" domainObjectName="GoodsCategoryBindBrand">
+			<generatedKey column="TS_ID" sqlStatement="select '00000000'||sys_guid() FROM DUAL" identity="false" />
+		</table>
+		<!--销售品类别筛选条件 -->
+		<table schema="" tableName="TS_SHOP_SX" domainObjectName="GoodsCategoryBindFilter">
+			<generatedKey column="TS_SHOP_SX_ID" sqlStatement="select '00000000'||sys_guid() FROM DUAL" identity="false" />
+		</table>
+		<!-- 销售品营销策略绑定关系历史信息 -->
+		<table schema="" tableName="ts_mk_yx_xsp_log" domainObjectName="GoodsMarketingHistory">
+			<generatedKey column="TS_ID" sqlStatement="select F_GETNID() FROM DUAL" identity="false" />
+		</table>
+		<!-- <table schema="" tableName="USER_X_MAN" domainObjectName="SuperUser" /> -->
+	</context>
+</generatorConfiguration>

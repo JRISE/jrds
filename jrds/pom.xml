@@ -437,7 +437,7 @@
                     <!--<webAppSourceDirectory>
                         ${project.build.directory}/${pom.artifactId}-${pom.version}
                     </webAppSourceDirectory>-->
-                    <contextPath>/ecms2</contextPath>
+                    <contextPath>/jrds</contextPath>
                 </configuration>
             </plugin>
 
